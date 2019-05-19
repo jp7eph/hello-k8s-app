@@ -1,3 +1,12 @@
+/**
+ * Copyright 2019 Naoki.H
+ *
+ * golang HTTP Server
+ * for deployment k8s on GCP
+ *
+ */
+
+// [Start all]
 package main
 
 import (
