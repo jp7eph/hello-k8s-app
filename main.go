@@ -8,21 +8,25 @@ import (
 )
 
 func main() {
+	// use PORT enviroment variable, default to 8080
 	port := "8080"
 	if fromEnv := os.Getenv("PORT"); fromEnv != "" {
 		port = fromEnv
 	}
 
+	// register hello function to handle all requests
 	server := http.NewServeMux()
 	server.HandleFunc("/", hello)
 
-	log.Panicf("Server listening on port %s", port)
+	// start the web server on port and accept requests
+	log.Printf("Server listening on port %s", port)
 	err := http.ListenAndServe(":"+port, server)
 	log.Fatal(err)
 }
 
+// hello responds to the request with a plain-text "Hello, world!" message.
 func hello(w http.ResponseWriter, r *http.Request) {
-	log.Panicf("Serving request: %s", r.URL.Path)
+	log.Printf("Serving request: %s", r.URL.Path)
 	host, _ := os.Hostname()
 	fmt.Fprintf(w, "Hello, world!\n")
 	fmt.Fprintf(w, "Version: 1.0.0\n")
